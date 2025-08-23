@@ -46,6 +46,14 @@ Dev Notes Pad is a comprehensive developer knowledge management system designed 
 - **Icons**: Unicode emoji icons for lightweight design
 - **Fonts**: Inter, Space Grotesk, and DM Sans for modern typography
 
+## 📸 Screenshots
+
+### Main Application View
+![Main Application View](./src/components/images/app.png)
+
+### Example Note
+![Example Note](./src/components/images/image.png)
+
 ## 📦 Installation
 
 ### Prerequisites
