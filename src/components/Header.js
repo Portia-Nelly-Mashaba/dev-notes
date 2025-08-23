@@ -9,11 +9,11 @@ const Header = ({ onCreateNote, onLogError }) => {
       </div>
       <div className="header-actions">
         <button className="btn btn-primary" onClick={onCreateNote}>
-          <i className="btn-icon">+</i>
+          <span style={{ fontSize: '1.125rem', marginRight: '0.5rem' }}>+</span>
           New Note
         </button>
         <button className="btn btn-secondary" onClick={onLogError}>
-          <i className="btn-icon">⚠️</i>
+          <span style={{ fontSize: '1.125rem', marginRight: '0.5rem' }}>⚠️</span>
           Log Error
         </button>
       </div>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { Search, Filter } from 'lucide-react';
 import './App.css';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -34,7 +35,7 @@ function AppContent() {
         <div className="content-area">
           <div className="search-section">
             <div className="search-container">
-              <i className="search-icon">🔍</i>
+              <Search className="search-icon" size={18} />
               <input
                 type="text"
                 placeholder="Search notes, tags, or content..."
@@ -44,7 +45,7 @@ function AppContent() {
               />
             </div>
             <button className="filters-btn">
-              <i className="filter-icon">🔽</i>
+              <Filter className="filter-icon" size={16} />
               Filters
             </button>
           </div>
