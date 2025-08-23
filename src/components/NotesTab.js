@@ -37,7 +37,12 @@ const NotesTab = ({ searchQuery }) => {
         <div key={note.id} className="note-card">
           <div className="note-header">
             <h3 className="note-title">{note.title}</h3>
-            <span className="note-type">{note.type}</span>
+            <div className="note-meta">
+              <span className="note-type">{note.type}</span>
+              {note.language && note.language !== 'other' && (
+                <span className="note-language">{note.language}</span>
+              )}
+            </div>
           </div>
           <p className="note-content">{note.content.substring(0, 150)}...</p>
           {note.tags && note.tags.length > 0 && (

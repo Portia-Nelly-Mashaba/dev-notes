@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useErrors } from '../context/ErrorContext';
 
-const LogErrorModal = ({ onClose }) => {
+const LogErrorPage = () => {
   const { addError } = useErrors();
+  const navigate = useNavigate();
   const [errorData, setErrorData] = useState({
-    title: '',
-    message: '',
     solution: '',
     stackTrace: '',
     file: '',
@@ -13,15 +13,20 @@ const LogErrorModal = ({ onClose }) => {
     screenshotUrl: '',
     tags: []
   });
-  const [newTag, setNewTag] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!errorData.title.trim() || !errorData.message.trim()) return;
+    if (!errorData.solution.trim()) return;
     
     addError(errorData);
-    onClose();
+    navigate('/');
   };
+
+  const handleCancel = () => {
+    navigate('/');
+  };
+
+  const [newTag, setNewTag] = useState('');
 
   const addTag = () => {
     if (newTag.trim() && !errorData.tags.includes(newTag.trim())) {
@@ -41,36 +46,13 @@ const LogErrorModal = ({ onClose }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>Log New Error</h2>
-          <button className="modal-close" onClick={onClose}>×</button>
+    <div className="error-page">
+      <div className="error-page-container">
+        <div className="error-page-header">
+          <h1>Log New Error</h1>
         </div>
         
-        <form onSubmit={handleSubmit} className="modal-form">
-          <div className="form-group">
-            <label>Error Title</label>
-            <input
-              type="text"
-              placeholder="Brief description of the error..."
-              value={errorData.title}
-              onChange={(e) => setErrorData({...errorData, title: e.target.value})}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Error Message</label>
-            <textarea
-              placeholder="Paste the full error message here..."
-              value={errorData.message}
-              onChange={(e) => setErrorData({...errorData, message: e.target.value})}
-              rows={4}
-              required
-            />
-          </div>
-
+        <form onSubmit={handleSubmit} className="error-page-form">
           <div className="form-group">
             <label>Solution/Fix</label>
             <textarea
@@ -78,6 +60,7 @@ const LogErrorModal = ({ onClose }) => {
               value={errorData.solution}
               onChange={(e) => setErrorData({...errorData, solution: e.target.value})}
               rows={4}
+              required
             />
           </div>
 
@@ -147,8 +130,8 @@ const LogErrorModal = ({ onClose }) => {
             )}
           </div>
 
-          <div className="modal-actions">
-            <button type="button" className="btn btn-secondary" onClick={onClose}>
+          <div className="error-page-actions">
+            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
               Cancel
             </button>
             <button type="submit" className="btn btn-primary">
@@ -161,4 +144,4 @@ const LogErrorModal = ({ onClose }) => {
   );
 };
 
-export default LogErrorModal;
+export default LogErrorPage;

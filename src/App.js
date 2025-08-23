@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import NotesTab from './components/NotesTab';
 import ErrorLogsTab from './components/ErrorLogsTab';
-import CreateNoteModal from './components/CreateNoteModal';
-import LogErrorModal from './components/LogErrorModal';
+import CreateNotePage from './components/CreateNotePage';
+import LogErrorPage from './components/LogErrorPage';
 import { NoteProvider, useNotes } from './context/NoteContext';
 import { ErrorProvider, useErrors } from './context/ErrorContext';
 
@@ -13,10 +14,9 @@ function AppContent() {
   const { notes } = useNotes();
   const { errors } = useErrors();
   const [activeTab, setActiveTab] = useState('notes');
-  const [showCreateNote, setShowCreateNote] = useState(false);
-  const [showLogError, setShowLogError] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [openAIKey, setOpenAIKey] = useState(localStorage.getItem('openai-key') || '');
+  const navigate = useNavigate();
 
   const handleSaveAPIKey = () => {
     localStorage.setItem('openai-key', openAIKey);
@@ -26,8 +26,8 @@ function AppContent() {
   return (
     <div className="app">
       <Header 
-        onCreateNote={() => setShowCreateNote(true)}
-        onLogError={() => setShowLogError(true)}
+        onCreateNote={() => navigate('/create-note')}
+        onLogError={() => navigate('/log-error')}
       />
       
       <main className="main-content">
@@ -82,24 +82,24 @@ function AppContent() {
         />
       </main>
 
-      {showCreateNote && (
-        <CreateNoteModal onClose={() => setShowCreateNote(false)} />
-      )}
 
-      {showLogError && (
-        <LogErrorModal onClose={() => setShowLogError(false)} />
-      )}
     </div>
   );
 }
 
 function App() {
   return (
-    <NoteProvider>
-      <ErrorProvider>
-        <AppContent />
-      </ErrorProvider>
-    </NoteProvider>
+    <Router>
+      <NoteProvider>
+        <ErrorProvider>
+          <Routes>
+            <Route path="/" element={<AppContent />} />
+            <Route path="/log-error" element={<LogErrorPage />} />
+            <Route path="/create-note" element={<CreateNotePage />} />
+          </Routes>
+        </ErrorProvider>
+      </NoteProvider>
+    </Router>
   );
 }
 

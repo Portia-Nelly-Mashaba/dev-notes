@@ -352,8 +352,10 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   width: 100%;
   max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
@@ -388,16 +390,26 @@
 
 .modal-form {
   padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
 }
 
 .form-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .form-group label {
@@ -492,9 +504,10 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: auto;
   padding-top: 1.5rem;
   border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
 }
 
 /* Notes Grid */
@@ -529,6 +542,14 @@
   color: #000000;
   margin: 0;
   font-weight: 600;
+  flex: 1;
+}
+
+.note-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-end;
 }
 
 .note-type {
@@ -537,6 +558,15 @@
   background-color: #f3f4f6;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
+}
+
+.note-language {
+  font-size: 0.8rem;
+  color: #1e40af;
+  background-color: #dbeafe;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
 }
 
 .note-content {
@@ -664,6 +694,138 @@
   gap: 0.5rem;
 }
 
+/* Note Page */
+.note-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.note-page-container {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 800px;
+  overflow: hidden;
+}
+
+.note-page-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.note-page-header h1 {
+  font-size: 1.5rem;
+  color: #000000;
+  margin: 0;
+  font-weight: 600;
+}
+
+.note-page-form {
+  padding: 1.5rem;
+}
+
+.note-page-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Language Select Styling */
+.language-select {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.language-select option {
+  padding: 8px 12px;
+}
+
+
+
+/* Monaco Editor Styling */
+.monaco-editor-container {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.monaco-editor-container .monaco-editor {
+  border-radius: 0.375rem;
+}
+
+/* Code Editor Styling (for fallback textarea) */
+.code-editor {
+  background-color: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  font-family: 'Fira Code', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  border: 1px solid #404040 !important;
+}
+
+.code-editor::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Error Page */
+.error-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.error-page-container {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 800px;
+  overflow: hidden;
+}
+
+.error-page-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.error-page-header h1 {
+  font-size: 1.5rem;
+  color: #000000;
+  margin: 0;
+  font-weight: 600;
+}
+
+.error-page-form {
+  padding: 1.5rem;
+}
+
+.error-page-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .main-content {
@@ -712,5 +874,27 @@
   .modal {
     margin: 1rem;
     max-height: calc(100vh - 2rem);
+  }
+  
+  .error-page,
+  .note-page {
+    padding: 1rem;
+  }
+  
+  .error-page-container,
+  .note-page-container {
+    margin: 0;
+  }
+  
+  .error-page-header,
+  .note-page-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .error-page-header h1,
+  .note-page-header h1 {
+    text-align: center;
   }
 }
