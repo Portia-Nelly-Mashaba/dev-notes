@@ -8,6 +8,7 @@ import NotesTab from './components/NotesTab';
 import ErrorLogsTab from './components/ErrorLogsTab';
 import CreateNotePage from './components/CreateNotePage';
 import LogErrorPage from './components/LogErrorPage';
+import ErrorDetailPage from './components/ErrorDetailPage';
 import { NoteProvider, useNotes } from './context/NoteContext';
 import { ErrorProvider, useErrors } from './context/ErrorContext';
 
@@ -96,7 +97,8 @@ function App() {
           <Routes>
             <Route path="/" element={<AppContent />} />
             <Route path="/log-error" element={<LogErrorPage />} />
-            <Route path="/create-note" element={<CreateNotePage />} />
+                        <Route path="/create-note" element={<CreateNotePage />} />
+            <Route path="/error/:id" element={<ErrorDetailPage />} />
           </Routes>
         </ErrorProvider>
       </NoteProvider>

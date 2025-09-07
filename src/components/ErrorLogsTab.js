@@ -100,7 +100,7 @@ const ErrorLogsTab = ({ searchQuery = '' }) => {
   return (
     <div className="errors-grid">
       {filteredErrors.map(error => (
-        <div key={error.id} className="error-card">
+                <div key={error.id} className="error-card" onClick={() => navigate(`/error/${error.id}`)}>
           <div className="error-header">
             <h3 className="error-title">{error.title}</h3>
             <div className="error-actions">
